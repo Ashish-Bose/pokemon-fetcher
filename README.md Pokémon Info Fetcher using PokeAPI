@@ -1,1 +1,6 @@
+# Pokémon Info Fetcher
+A simple web app that fetches Pokémon details using the PokeAPI. Enter a name (like "pikachu") or get a random Pokémon.
 
+**Live Demo**: [Insert your GitHub Pages URL here]
+**Features**: Displays name, image, height, weight, abilities.
+**Tech**: HTML, CSS, JavaScript, PokeAPI.
