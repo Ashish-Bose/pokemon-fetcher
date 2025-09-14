@@ -6,7 +6,11 @@ const pokemonInfoDiv = document.getElementById('pokemon-info');
 async function fetchPokemon(nameOrId) {
     try {
         pokemonInfoDiv.innerHTML = '<p>Loading...</p>';
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameOrId.toLowerCase()}`);
+        
+        // Convert to string if it's a number (for random ID)
+        const pokemonQuery = typeof nameOrId === 'number' ? nameOrId.toString() : nameOrId.toLowerCase();
+        
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonQuery}`);
         if (!response.ok) {
             throw new Error('Pokémon not found! Try another name.');
         }
