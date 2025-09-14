@@ -7,12 +7,12 @@ async function fetchPokemon(nameOrId) {
     try {
         pokemonInfoDiv.innerHTML = '<p>Loading...</p>';
         
-        // Convert to string if it's a number (for random ID)
+        // Handle number (ID) or string (name)
         const pokemonQuery = typeof nameOrId === 'number' ? nameOrId.toString() : nameOrId.toLowerCase();
         
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonQuery}`);
         if (!response.ok) {
-            throw new Error('Pokémon not found! Try another name.');
+            throw new Error('Pokémon not found! Try a different name.');
         }
         const data = await response.json();
         
@@ -24,7 +24,8 @@ async function fetchPokemon(nameOrId) {
             <p><strong>Abilities:</strong> ${data.abilities.map(a => a.ability.name).join(', ')}</p>
         `;
     } catch (error) {
-        pokemonInfoDiv.innerHTML = `<p class="error">${error.message}</p>`;
+        console.error('Fetch error:', error); // Logs for debugging
+        pokemonInfoDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
     }
 }
 
@@ -38,6 +39,6 @@ fetchBtn.addEventListener('click', () => {
 });
 
 randomBtn.addEventListener('click', () => {
-    const randomId = Math.floor(Math.random() * 1000) + 1; // ~1000 Pokémon exist
+    const randomId = Math.floor(Math.random() * 1025) + 1; // Covers ~1025 Pokémon
     fetchPokemon(randomId);
 });
